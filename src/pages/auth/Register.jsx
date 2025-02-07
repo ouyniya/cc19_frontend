@@ -31,7 +31,8 @@ function Register() {
 
         console.log(error.response.data.message)
       }
-      console.log(value)
+      
+      // console.log(value)
     }
 
     // console.log(value)
