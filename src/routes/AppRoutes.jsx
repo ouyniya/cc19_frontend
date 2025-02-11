@@ -3,11 +3,12 @@ import { Route, Routes } from 'react-router'
 import Layout from '../layouts/Layout'
 import Home from '../pages/Home'
 import About from '../pages/About'
-import Register from '../pages/auth/Register'
+// import Register from '../pages/auth/Register'
 import Login from '../pages/auth/Login'
 import Dashboard from '../pages/admin/Dashboard'
 import Manage from '../pages/admin/Manage'
 import HomeUser from '../pages/user/HomeUser'
+import Register1 from '../pages/auth/Register1'
 
 function AppRoutes() {
 
@@ -18,7 +19,7 @@ function AppRoutes() {
             <Route path='/' element={<Layout />}>
               <Route index element={<Home />} />
               <Route path='about' element={<About />} />
-              <Route path='register' element={<Register />} />
+              <Route path='register' element={<Register1 />} />
               <Route path='login' element={<Login />} />
             </Route>
 

@@ -228,3 +228,93 @@ https://react-hook-form.com/get-started
 npm install react-hook-form
 ```
 
+## update `Register1.jsx`
+
+```js
+import axios from 'axios';
+// import React, { useState } from 'react'
+import { createAlert } from '../../utils/createAlert'
+import { useForm } from 'react-hook-form'
+import FormInput from '../../components/form/FormInput';
+
+function Register1() {
+
+    const { register, handleSubmit, formState } = useForm()
+    const { isSubmitting } = formState;
+    // console.log(isSubmitting)
+
+    const hdlSubmit = async (value) => {
+    //   e.preventDefault()
+    await new Promise((resolve) => setTimeout(resolve, 500))
+
+      try {
+        const res = await axios.post('http://localhost:8000/api/register', value)
+        createAlert("success","Register Success")
+        
+      } catch (error) {
+        createAlert("error", error.response.data.message)
+
+        // console.log(error.response.data.message)
+      }
+      
+     
+    }
+
+  return (
+   <div className='flex w-full h-full justify-end pt-2.5'>
+    <div className='w-64 border p-4 rounded-md'>
+      <h1 className='text-xl font-bold text-center pb-2'>Register1</h1>
+      <form onSubmit={handleSubmit(hdlSubmit)}>
+        <div className='mb-2'>
+
+          <FormInput register={register} name="email" />
+          <FormInput register={register} name="firstName" />
+          <FormInput register={register} name="lastName" />
+          <FormInput register={register} name="password" />
+          <FormInput register={register} name="confirmPassword" />
+
+          <button 
+            type='submit'
+            className='bg-blue-700 text-amber-50 p-3 rounded-xl cursor-pointer'
+          >{
+            isSubmitting ? <p>Loading...</p> : "Register"
+          }</button>
+        </div>
+      </form>
+    </div>
+   </div>
+  )
+}
+
+export default Register1
+```
+
+## Step 7 validation 
+
+https://github.com/react-hook-form/resolvers
+
+@client 
+
+```bash
+npm install @hookform/resolvers
+npm i zod
+```
+
+
+## Step 8 zustand 
+
+@client 
+
+```bash
+npm install zustand
+```
+
+### create store
+
+create folder `store`
+
+file `auth-store.jsx`
+
+```js
+
+```
