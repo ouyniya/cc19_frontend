@@ -9,10 +9,14 @@ import { useNavigate } from "react-router"
 // validator
 import { loginSchema } from '../../utils/validators';
 import { zodResolver } from '@hookform/resolvers/zod'
-import { actionLogin } from '../../api/auth';
+import useAuthStore from '../../store/auth-store';
 
 
 function Login() {
+
+    // zustand
+    const actionLoginWithZustand = useAuthStore(state => state.actionLoginWithZustand)
+    // console.log(actionLoginWithZustand) // obj in store
 
     const navigate = useNavigate();
 
@@ -26,13 +30,26 @@ function Login() {
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
       try {
-        const res = await actionLogin(value)
-        console.log(res.data)
-        const  role = res.data.payload.role
+        const res = await actionLoginWithZustand(value)
+        // console.log(res.user)
+        const firstName = res?.firstName
+
+        if (res.success) {
+          roleRedirect(res.role)
+          reset()
+
+          createAlert("success", `Welcome back, ${firstName}`)
+        } else {
+          createAlert("error", "Something wrong")
+        }
+
+        // const res = await actionLogin(value)
+        // console.log(res.data)
+        // const  role = res.data.payload.role
 
         // roleRedirect(role)
         // reset()
-        createAlert("success","Log in Success")
+        // createAlert("success","Log in Success")
         
       } catch (error) {
         createAlert("error", error.response?.data.message)
